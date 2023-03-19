@@ -1,4 +1,4 @@
-# Put your wireguard config in ./config/wg0.conf
+### Put your wireguard config in ./config/wg0.conf
 
 ```sh
 [Interface]
@@ -13,7 +13,7 @@ PreDown = iptables -t nat -D POSTROUTING -o wg+ -j MASQUERADE
 PublicKey = "your public key"
 PresharedKey = "your preshared key"
 AllowedIPs = 0.0.0.0/0
-Endpoint = "server-ip:51820"
+Endpoint = "wireguard-server-ip:51820"
 ```
 
 #
