@@ -1,4 +1,20 @@
-# Routing Docker Host And Container Traffic Through WireGuard container
+# Put your wireguard config in ./config/wg0.conf
+
+```sh
+[Interface]
+PrivateKey = "your private key"
+ListenPort = 51820
+Address = 10.13.13.2/32
+DNS = 8.8.8.8
+PostUp = iptables -t nat -A POSTROUTING -o wg+ -j MASQUERADE
+PreDown = iptables -t nat -D POSTROUTING -o wg+ -j MASQUERADE
+
+[Peer]
+PublicKey = "your public key"
+PresharedKey = "your preshared key"
+AllowedIPs = 0.0.0.0/0
+Endpoint = "server-ip:51820"
+```
 
 #
 ```sh
@@ -20,5 +36,5 @@ sudo ip route add 89.45.90.197 via 192.168.1.1
 sudo ip route add default via 172.20.0.50
 ```
 
-89.45.90.197 - change to your wireguard server ip
+89.45.90.197 - change to your wireguard server ip<br/>
 192.168.1.1  - change to your default gateway ip
